@@ -1,7 +1,7 @@
 # It Builds an image to deploy a Rserve
 
 # Dotcloud ubuntu image
-FROM ubuntu:13.10
+FROM ubuntu:14.04
 MAINTAINER Felipe Triana, ftrianakast@gmail.com
 
 # Update
@@ -11,7 +11,9 @@ RUN apt-get update
 RUN apt-get install -y wget
 
 # Install latest R
-RUN echo 'deb http://www.laqee.unal.edu.co/CRAN/bin/linux/ubuntu saucy/' >> /etc/apt/sources.list
+RUN echo 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list
+RUN gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E084DAB9
+RUN gpg -a --export E084DAB9 | sudo apt-key add -
 RUN apt-get update
 RUN apt-get install -y --force-yes r-base
 RUN apt-get install -y r-base-dev
